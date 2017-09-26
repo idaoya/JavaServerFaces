@@ -1,0 +1,38 @@
+body {
+	font-family: "Open Sans", Arial, sans-serif;
+	color: #444444;
+	font-size: 1.0em;
+	font-weight: 400;
+	text-align: right;
+}
+
+.link {
+	font-family: "Open Sans", Arial, sans-serif;
+	color: red;
+	font-size: 1.0em;
+	font-weight: 600;
+	text-align: right;
+}
+
+.order-table {
+	border-collapse: collapse;
+}
+
+.order-table-header {
+	text-align: center;
+	background: none repeat scroll 0 0 #E0E0E0;
+	border-bottom: 1px solid #BBBBBB;
+	padding: 30px;
+}
+
+.order-table-odd-row {
+	text-align: center;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-top: 1px solid #BBBBBB;
+}
+
+.order-table-even-row {
+	text-align: center;
+	background: none repeat scroll 0 0 #F0F0F0;
+	border-top: 1px solid #BBBBBB;
+}

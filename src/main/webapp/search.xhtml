@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<center>
+
+		<h3>Søk Kunde</h3>
+			<h:form>
+			<h:panelGrid columns="3">
+			
+			    Navn : 
+				<h:inputText id="name" value="#{customer.name}" size="30"
+					label="Navn">
+				</h:inputText>
+				<h:message for="name" />
+
+			</h:panelGrid>
+			<h:commandButton value="Søk" action="#{customer.searchCustomer()}" />
+			<h:commandButton value="Nullstill" type="reset" />
+		</h:form>
+		<br />
+
+		<h:dataTable value="#{customer.getCustomerSearch()}" var="c"
+			styleClass="order-table" headerClass="order-table-header"
+			rowClasses="order-table-odd-row,order-table-even-row">
+			<h:column>
+				<f:facet name="header">
+    				ID
+    			</f:facet>
+    				#{c.customerId}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Navn
+				</f:facet>
+    				#{c.name}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Kjønn
+				</f:facet>
+    				#{c.gender}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Adresse
+				</f:facet>
+    				#{c.address}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Land
+				</f:facet>
+    				#{c.country}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Ønsker
+				</f:facet>
+    				#{c.receive}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Dato
+				</f:facet>
+    				#{c.createdDate}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+				Slett
+				</f:facet>
+				<h:form>
+					<h:commandButton value="Slett"
+						action="#{customer.deleteCustomer()}">
+						<f:param name="customerId" value="#{c.customerId}" />
+					</h:commandButton>
+				</h:form>
+			</h:column>
+		</h:dataTable>	
+	</center>
+</h:body>
+</html>

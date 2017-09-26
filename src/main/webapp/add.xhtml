@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:title>Demo Opprette Kunde</h:title>
+</h:head>
+<h:body>
+	<center>
+
+		<h3>Opprette Kunde</h3>
+		<h:form>
+			<h:panelGrid columns="3">				
+			    Navn : 
+				<h:inputText id="name" value="#{customer.name}" size="30"
+					required="true" label="Navn">
+				</h:inputText>
+				<h:message for="name" />
+				
+				Kjønn :
+				<h:selectOneRadio id="gender" value="#{customer.gender}">
+					<f:selectItem itemValue="Mann" itemLabel="Mann" />
+					<f:selectItem itemValue="Kvinne" itemLabel="Kvinne" />
+				</h:selectOneRadio>
+				<h:message for="gender" />
+								
+			    Adresse : 
+				<h:inputTextarea id="address" value="#{customer.address}" cols="30"
+					rows="4" label="Adresse">
+				</h:inputTextarea>
+				<h:message for="address" />
+				
+				Land:
+				<h:selectOneMenu id="country" value="#{customer.country}">
+					<f:selectItem itemValue="" itemLabel="------------" />
+					<f:selectItem itemValue="England" itemLabel="England" />
+					<f:selectItem itemValue="Norge" itemLabel="Norge" />
+					<f:selectItem itemValue="Thailand" itemLabel="Thailand" />
+					<f:selectItem itemValue="USA" itemLabel="USA" />
+				</h:selectOneMenu>
+				<h:message for="country" />
+				
+				Ønsker:
+   				<h:selectManyCheckbox id="receive" value="#{customer.receive}">
+					<f:selectItem itemValue="E-post" itemLabel="E-post" />
+					<f:selectItem itemValue="SMS" itemLabel="SMS" />
+				</h:selectManyCheckbox>
+				<h:message for="receive" />
+
+			</h:panelGrid>
+			<h:commandButton value="OK" action="#{customer.addCustomer()}" />
+			<h:commandButton value="Nullstill" type="reset" />
+		</h:form>
+
+		<br /> <a href="search.xhtml" class="link">Søk kunde</a>
+
+		<h:dataTable value="#{customer.getCustomerList()}" var="c"
+			styleClass="order-table" headerClass="order-table-header"
+			rowClasses="order-table-odd-row,order-table-even-row">
+			<h:column>
+				<f:facet name="header">
+    				ID
+    			</f:facet>
+    				#{c.customerId}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Navn
+				</f:facet>
+    				#{c.name}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Kjønn
+				</f:facet>
+    				#{c.gender}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Adresse
+				</f:facet>
+    				#{c.address}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Land
+				</f:facet>
+    				#{c.country}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Ønsker
+				</f:facet>
+    				#{c.receive}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Dato
+				</f:facet>
+    				#{c.createdDate}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+				Slett
+				</f:facet>
+				<h:form>
+					<h:commandButton value="Slett"
+						action="#{customer.deleteCustomer()}">
+						<f:param name="customerId" value="#{c.customerId}" />
+					</h:commandButton>
+				</h:form>
+			</h:column>
+		</h:dataTable>
+	</center>
+</h:body>
+</html>

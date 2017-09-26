@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body>
+	<a href="index.xhtml"> Add New </a>
+	<h:form id="formId">
+		<h:dataTable value="#{customer.getCustomerList()}" var="c"
+			styleClass="order-table" headerClass="order-table-header"
+			rowClasses="order-table-odd-row,order-table-even-row">
+			<h:column>
+				<f:facet name="header">
+    				Customer ID
+    			</f:facet>
+    				#{c.customerId}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Name
+				</f:facet>
+    				#{c.name}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Address
+				</f:facet>
+    				#{c.address}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Created Date
+				</f:facet>
+    				#{c.createdDate}
+    		</h:column>
+			<h:column>
+				<f:facet name="header">
+    				Edit
+    			</f:facet>
+				<a href="edit.xhtml?customerId=#{c.customerId}">Edit</a>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+				Delete
+				</f:facet>
+				<h:commandButton value="Delete"
+					action="#{customer.deleteCustomer()}">
+					<f:param name="customerId" value="#{c.customerId}" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	<h3>UPDATE</h3>
+	<h:form>
+		<h:dataTable value="#{customer.getCustomerByID()}" var="d"
+			id="dataTable">
+			styleClass="order-table" headerClass="order-table-header"
+			rowClasses="order-table-odd-row,order-table-even-row">			
+			<h:column>
+				<h:panelGrid columns="3">
+				Customer ID :
+				<h:inputText id="customerId" value="#{d.customerId}" size="39"
+						required="true" label="Customer ID">
+					</h:inputText>
+					<h:message for="customerId" />Name: 
+				<h:inputText id="name" value="#{d.name}" size="39" required="true"
+						label="Name">
+					</h:inputText>
+					<h:message for="name" />										
+				Address : 
+				<h:inputTextarea id="address" value="#{d.address}" cols="30"
+						rows="4" required="true" label="Address">
+					</h:inputTextarea>
+					<h:message for="address" />
+					<h:commandButton value="Submit" update="@form"
+						action="#{customer.updateCustomer()}">
+						<f:param name="customerId" value="#{d.customerId}" />
+						<f:param name="name" value="#{d.name}" />
+						<f:param name="address" value="#{d.address}" />
+					</h:commandButton>
+				</h:panelGrid>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>
